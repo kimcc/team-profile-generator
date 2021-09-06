@@ -1,5 +1,7 @@
+
 # Team Profile Generator
 
+https://user-images.githubusercontent.com/15278020/132256283-102562ac-b5ed-4137-8fb9-e96934cd08a4.mp4
 ![Screenshot of the team profile generator](image/team-profile-generator-image.png)
 
 ## Description
