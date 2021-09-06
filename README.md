@@ -3,7 +3,7 @@
 
 ![Screenshot of the team profile generator](image/team-profile-generator-image.png)
 
-![Screen recording of the team profile generator](https://user-images.githubusercontent.com/15278020/132256283-102562ac-b5ed-4137-8fb9-e96934cd08a4.mp4)
+https://user-images.githubusercontent.com/15278020/132256283-102562ac-b5ed-4137-8fb9-e96934cd08a4.mp4
 
 ## Description
 The Team Profile Generator is a command-line application that generates a team profile webpage for an engineering team. It uses [Inquirer](https://www.npmjs.com/package/inquirer) to ask a series of questions to populate an HTML file with team member information. When starting the application, the user will be prompted to enter the team manager’s name, employee ID, email address, and office number.
