@@ -29,13 +29,17 @@ h3 {
   font-size: 0.875em;
   margin: 1.8em 0em 0.25em 0em;
   text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+p, a {
+  font-family: 'Avenir', sans-serif;
+  font-size: 1.06em;
+  color: var(--medium-gray);
 }
 
 p {
-  font-family: 'Avenir', sans-serif;
-  margin-top: 0px;
-  font-size: 1.06em;
-  color: var(--medium-gray);
+  margin: 0px 0px 16px 0px;
 }
 
 main {
@@ -46,7 +50,7 @@ main {
 
 section {
   display: grid;
-  grid-template-columns: 1.3fr 1fr 1.2fr 1fr;
+  grid-template-columns: 1fr 1fr;
   padding: 1em 0em;
 }
 
@@ -63,8 +67,18 @@ section:not(:last-child) {
 .profile {
   display: flex;
   padding-right: 32px;
+  grid-column: 1 / -1;
 }
 
 .profile div {
   padding-left: 24px;
+}
+
+@media screen and (min-width: 700px) {
+  section {
+    grid-template-columns: 1.3fr 1fr 1.2fr 1fr;
+  }
+  .profile {
+    grid-column: initial;
+  }
 }

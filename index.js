@@ -136,7 +136,7 @@ const promptOtherMembers = () => {
     {
       type: 'input',
       name: 'engineerGithub',
-      message: "What is your engineer's Github? (Required)",
+      message: "What is your engineer's Github username? (Required)",
       when: answers => {
         return answers.next === 'Add an engineer'
       },
@@ -144,7 +144,7 @@ const promptOtherMembers = () => {
         if (engineerGithub) {
           return true;
         } else {
-          console.log("Please enter your engineer's Github!");
+          console.log("Please enter your engineer's Github username!");
           return false;
         }
       }

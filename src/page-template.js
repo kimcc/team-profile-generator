@@ -19,11 +19,11 @@ const generateEmployee = employeeData => {
       </div>
       <div>
         <h3>Email Address</h3>
-        <p>${person.email}</p>
+        <p><a href="mailto:${person.email}">${person.email}</a></p>
       </div>
       <div>
         <h3>Github</h3>
-        <p>${person.github}</p>
+        <p><a href="https://www.github.com/${person.github}" target="_blank">${person.github}</a></p>
       </div>
     </section>
   `;
@@ -46,7 +46,7 @@ const generateEmployee = employeeData => {
       </div>
       <div>
         <h3>Email Address</h3>
-        <p>${person.email}</p>
+        <p><a href="mailto:${person.email}">${person.email}</a></p>
       </div>
       <div>
         <h3>School</h3>
@@ -72,7 +72,7 @@ const generateEmployee = employeeData => {
     </div>
     <div>
       <h3>Email Address</h3>
-      <p>${employeeData[0].email}</p>
+      <p><a href="mailto:${employeeData[0].email}">${employeeData[0].email}</a></p>
     </div>
     <div>
       <h3>Office Number</h3>
