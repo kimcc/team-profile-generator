@@ -3,7 +3,10 @@ const fs = require('fs');
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
-const teamArray = [];
+const { writeFile, copyFile } = require('./src/generate-site.js');
+const generatePage = require('./src/page-template');
+
+const employeeArray = [];
 
 // Prompt to fill out manager information
 const promptManager = () => {
@@ -65,14 +68,15 @@ const promptManager = () => {
     .then (employeeData => {
       const { managerName, managerID, managerEmail, managerOffice } = employeeData; // Gets the values so we can use them to construct the object
       const manager = new Manager(managerName, managerID, managerEmail, managerOffice);
-      teamArray.push(manager);
-    });
+      //console.log(manager);
+      employeeArray.push(manager);
+    })
+    .then(promptOtherMembers);
 }
 
 // Prompt the user to add an engineer, intern or finish building their team.
 // If they pick finish building my team, they will exit out. Otherwise, it will prompt them again.
 const promptOtherMembers = () => {
-  console.log('prompt other members');
   return inquirer
     .prompt([
     {
@@ -214,26 +218,37 @@ const promptOtherMembers = () => {
     if (employeeData.next === 'Add an engineer') {
       const { engineerName, engineerID, engineerEmail, engineerGithub } = employeeData; // Gets the values so we can use them to construct the object
       const engineer = new Engineer(engineerName, engineerID, engineerEmail, engineerGithub);
-      teamArray.push(engineer);
+      employeeArray.push(engineer);
 
-      promptOtherMembers();
+      return promptOtherMembers();
 
     } else if (employeeData.next === 'Add an intern') {
       const { internName, internID, internEmail, internSchool } = employeeData; // Gets the values so we can use them to construct the object
       const intern = new Intern(internName, internID, internEmail, internSchool);
-      teamArray.push(intern);
+      employeeArray.push(intern);
 
-      promptOtherMembers();
+      return promptOtherMembers();
     }
     else {
-      console.log(teamArray);
-      return teamArray;
+      return employeeArray;
     }
   })
 };
 
 promptManager()
-  .then(promptOtherMembers)
+  .then(employeeData => {
+    return generatePage(employeeData);
+  })
+  .then(pageHTML => {
+    return writeFile(pageHTML);
+  })
+  .then(writeFileResponse => {
+    console.log(writeFileResponse);
+    return copyFile();
+  })
+  .then(copyFileResponse => {
+      console.log(copyFileResponse);
+  })
   .catch(err => {
     console.log(err);
 });
