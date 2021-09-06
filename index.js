@@ -1,5 +1,9 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
+const Manager = require('./lib/Manager');
+const Engineer = require('./lib/Engineer');
+const Intern = require('./lib/Intern');
+const teamArray = [];
 
 // Prompt to fill out manager information
 const promptManager = () => {
@@ -22,8 +26,8 @@ const promptManager = () => {
           type: 'input',
           name: 'managerID',
           message: "What is your team manager's employee ID? (Required)",
-          validate: managerName => {
-            if (managerName) {
+          validate: managerID => {
+            if (managerID) {
               return true;
             } else {
               console.log("Please enter your team manager's employee ID!");
@@ -57,7 +61,12 @@ const promptManager = () => {
             }
           }
         }
-    ]);
+    ])
+    .then (employeeData => {
+      const { managerName, managerID, managerEmail, managerOffice } = employeeData; // Gets the values so we can use them to construct the object
+      const manager = new Manager(managerName, managerID, managerEmail, managerOffice);
+      teamArray.push(manager);
+    });
 }
 
 // Prompt the user to add an engineer, intern or finish building their team.
@@ -201,11 +210,24 @@ const promptOtherMembers = () => {
       }
     }
   ])
-  .then((answers) => {
-    if (answers.next === 'Add an engineer' || answers.next === 'Add an intern') {
+  .then(employeeData => {
+    if (employeeData.next === 'Add an engineer') {
+      const { engineerName, engineerID, engineerEmail, engineerGithub } = employeeData; // Gets the values so we can use them to construct the object
+      const engineer = new Engineer(engineerName, engineerID, engineerEmail, engineerGithub);
+      teamArray.push(engineer);
+
       promptOtherMembers();
-    } else {
-        return;
+
+    } else if (employeeData.next === 'Add an intern') {
+      const { internName, internID, internEmail, internSchool } = employeeData; // Gets the values so we can use them to construct the object
+      const intern = new Intern(internName, internID, internEmail, internSchool);
+      teamArray.push(intern);
+
+      promptOtherMembers();
+    }
+    else {
+      console.log(teamArray);
+      return teamArray;
     }
   })
 };
